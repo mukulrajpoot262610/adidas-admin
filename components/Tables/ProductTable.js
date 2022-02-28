@@ -1,5 +1,4 @@
 import { useRouter } from "next/router"
-import { deleteProduct } from "../../services/lib/productHandler"
 
 export default function ProductTable({ products, setProductState }) {
 
@@ -64,7 +63,7 @@ export default function ProductTable({ products, setProductState }) {
                     </thead>
 
                     <tbody className="bg-white divide-y-2 divide-black">
-                        {products.map((product) => (
+                        {products?.map((product) => (
                             <tr key={product._id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     {/* <Checkbox /> */}

@@ -12,12 +12,10 @@ const api = axios.create({
 
 // LIST
 export const getAllProducts = () => api.get('/api/products')
+export const addProducts = (data) => api.post('/api/products', data)
 export const SendOtp = (data) => api.post('/api/send-otp', data)
 export const VerifyOtp = (data) => api.post('/api/verify-otp', data)
 export const VerifyAdminOtp = (data) => api.post('/api/verify-admin-otp', data)
-export const UpdateDetails = (data) => api.post('/api/update-personal', data)
-export const AddAddress = (data) => api.post('/api/address', data)
-export const DeleteAddress = (data) => api.delete(`/api/address/${data}`)
 
 api.interceptors.response.use((config) => {
     return config

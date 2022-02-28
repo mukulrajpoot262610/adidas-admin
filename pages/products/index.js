@@ -1,9 +1,10 @@
 import Head from 'next/head'
 import Link from 'next/link'
 import React, { useState } from 'react'
+import Header from '../../components/common/Header'
 import Navbar from '../../components/Layout/Navbar'
 import ProductTable from '../../components/Tables/ProductTable'
-import { getProducts } from '../../services/lib/productHandler'
+import { getAllProducts } from '../../services/api'
 
 const Products = ({ products }) => {
 
@@ -22,8 +23,8 @@ const Products = ({ products }) => {
             <main className="flex flex-col justify-center items-center mt-32">
 
                 <div className='w-10/12'>
-                    <h1 className='font-bold text-3xl'>Hello there, mukulrajpoot@gmail.com</h1>
-                    <p className='mb-4'>Here is some information about products</p>
+
+                    <Header />
 
                     <div className='flex justify-between items-center'>
                         <h1 className='font-bold text-xl my-4'>Products</h1>
@@ -41,22 +42,20 @@ const Products = ({ products }) => {
 
 export default Products
 
-export async function getServerSideProps() {
-
-    let products;
+export async function getStaticProps() {
 
     try {
-        const res = await getProducts();
-        if (res.data.success) {
-            products = res.data.products;
-        } else {
-            products = [];
+        const res = await getAllProducts();
+
+        return {
+            props: { products: res.data.products },
+            revalidate: 10
         }
     } catch (err) {
         console.log(err.message)
-    }
 
-    return {
-        props: { products }
+        return {
+            props: { products: [] }
+        }
     }
 }
