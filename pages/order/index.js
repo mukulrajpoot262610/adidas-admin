@@ -3,8 +3,6 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../components/Layout/Header'
 import Navbar from '../../components/Layout/Navbar'
 import OrderTable from '../../components/Tables/OrderTable'
-import { getAllOrder } from '../../services/lib/orderHandler'
-import { getAllUser } from '../../services/lib/userHandler'
 
 const Order = ({ orders, users }) => {
 
@@ -36,25 +34,25 @@ const Order = ({ orders, users }) => {
 
 export default Order
 
-export async function getServerSideProps() {
+// export async function getServerSideProps() {
 
-    let orders = [];
-    let users = [];
+//     let orders = [];
+//     let users = [];
 
-    try {
-        const res = await getAllOrder();
-        const res2 = await getAllUser();
-        users = res2.data.users;
-        if (res.data.success) {
-            orders = res.data.orders;
-        } else {
-            orders = [];
-        }
-    } catch (err) {
-        console.log(err.response.data)
-    }
+//     try {
+//         const res = await getAllOrder();
+//         const res2 = await getAllUser();
+//         users = res2.data.users;
+//         if (res.data.success) {
+//             orders = res.data.orders;
+//         } else {
+//             orders = [];
+//         }
+//     } catch (err) {
+//         console.log(err.response.data)
+//     }
 
-    return {
-        props: { orders, users }
-    }
-}
+//     return {
+//         props: { orders, users }
+//     }
+// }

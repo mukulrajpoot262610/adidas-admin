@@ -8,9 +8,7 @@ import Navbar from '../components/Layout/Navbar'
 
 const Dashboard = () => {
 
-    const userData = useSelector(state => state.user.currentUser)
-
-    const user = userData ? userData.user : ""
+    const { user } = useSelector(state => state.auth)
 
     return (
         <div className="min-h-screen w-full">
