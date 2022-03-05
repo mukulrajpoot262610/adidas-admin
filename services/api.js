@@ -16,6 +16,12 @@ export const addProducts = (data) => api.post('/api/products', data)
 export const SendOtp = (data) => api.post('/api/send-otp', data)
 export const VerifyOtp = (data) => api.post('/api/verify-otp', data)
 export const VerifyAdminOtp = (data) => api.post('/api/verify-admin-otp', data)
+export const logout = () => api.post('/api/logout')
+
+
+export const GetAllOrders = () => api.get('/api/orders')
+export const GetOrderDetail = (id) => api.get(`/api/order/${id}`)
+export const GetStats = () => api.get('/api/stats')
 
 api.interceptors.response.use((config) => {
     return config

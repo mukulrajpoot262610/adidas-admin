@@ -1,15 +1,22 @@
 import { useRouter } from 'next/router'
 import React from 'react'
 import { useDispatch } from 'react-redux'
+import { logout } from '../../services/api'
+import { setAuth } from '../../redux/authSlice'
 
 const Navbar = () => {
 
     const dispatch = useDispatch()
     const router = useRouter()
 
-    const handleLogout = () => {
-        dispatch(logout())
-        router.push('/')
+    const handleLogout = async () => {
+        try {
+            const { data } = await logout()
+            dispatch(setAuth(data))
+            router.push('/')
+        } catch (err) {
+            console.log(err)
+        }
     }
 
     return (

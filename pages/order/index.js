@@ -3,10 +3,25 @@ import React, { useEffect, useState } from 'react'
 import Header from '../../components/Layout/Header'
 import Navbar from '../../components/Layout/Navbar'
 import OrderTable from '../../components/Tables/OrderTable'
+import { GetAllOrders } from '../../services/api'
 
-const Order = ({ orders, users }) => {
+const Order = () => {
+    const [orderState, setOrderState] = useState()
 
-    const [orderState, setOrderState] = useState(orders)
+    useEffect(() => {
+        const fetchData = async () => {
+
+            try {
+                const res = await GetAllOrders()
+                setOrderState(res.data.orders)
+                console.log(res.data)
+            } catch (err) {
+                console.log(err)
+            }
+        }
+
+        fetchData()
+    }, [])
 
     return (
         <div className="min-h-screen w-full">
@@ -22,9 +37,9 @@ const Order = ({ orders, users }) => {
                 <div className='w-10/12'>
                     <Header />
 
-                    <h1 className='font-bold text-xl my-4'>Users</h1>
+                    <h1 className='font-bold text-xl my-4'>Orders</h1>
 
-                    <OrderTable orders={orderState} setOrderState={setOrderState} users={users}
+                    <OrderTable orders={orderState} setOrderState={setOrderState}
                     />
                 </div>
             </main>
@@ -33,26 +48,3 @@ const Order = ({ orders, users }) => {
 }
 
 export default Order
-
-// export async function getServerSideProps() {
-
-//     let orders = [];
-//     let users = [];
-
-//     try {
-//         const res = await getAllOrder();
-//         const res2 = await getAllUser();
-//         users = res2.data.users;
-//         if (res.data.success) {
-//             orders = res.data.orders;
-//         } else {
-//             orders = [];
-//         }
-//     } catch (err) {
-//         console.log(err.response.data)
-//     }
-
-//     return {
-//         props: { orders, users }
-//     }
-// }

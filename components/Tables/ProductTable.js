@@ -1,4 +1,5 @@
 import { useRouter } from "next/router"
+import { AiFillDelete, AiFillEdit } from "react-icons/ai";
 
 export default function ProductTable({ products, setProductState }) {
 
@@ -89,12 +90,12 @@ export default function ProductTable({ products, setProductState }) {
                                     </span>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">₹{product.salePrice}</td>
-                                <td className="px-4 pt-6 items-center justify-center whitespace-nowrap text-xl font-medium flex h-full">
-                                    <p className="text-indigo-600 hover:text-indigo-900 mr-4" onClick={() => handleEdit(product._id)}>
-                                        <i className="fas fa-pencil-alt cursor-pointer"></i>
+                                <td className="px-2 pt-6 items-center justify-center whitespace-nowrap text-2xl font-medium flex h-full">
+                                    <p className="text-indigo-600 hover:text-indigo-900 mr-4 cursor-pointer" onClick={() => handleEdit(product._id)}>
+                                        <AiFillEdit />
                                     </p>
-                                    <p className="text-red-600 hover:text-red-400" onClick={() => handleDelete(product._id)}>
-                                        <i className="fas fa-trash-alt cursor-pointer"></i>
+                                    <p className="text-red-600 hover:text-red-400 cursor-pointer" onClick={() => handleDelete(product._id)}>
+                                        <AiFillDelete />
                                     </p>
                                 </td>
                             </tr>

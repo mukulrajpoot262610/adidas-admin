@@ -1,6 +1,7 @@
+import Link from "next/link"
 import { useRouter } from "next/router"
 
-export default function OrderTable({ orders, users }) {
+export default function OrderTable({ orders }) {
 
     const router = useRouter()
 
@@ -49,30 +50,32 @@ export default function OrderTable({ orders, users }) {
 
                     <tbody className="bg-white divide-y-2 divide-black">
                         {orders?.map((order, i) => (
-                            <tr key={order._id}>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    #000{i + 1}
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="">
-                                        <div className="text-sm font-bold capitalize">{order.createdAt.split("T")[0]}</div>
-                                        <div className="text-xs text-gray-400">YYYY-MM-DD</div>
-                                    </div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm capitalize text-gray-900">{users.find(e => e._id === order.user)?.firstName}</div>
-                                    <div className="text-sm text-gray-500"></div>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap">
-                                    <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.isPaid ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} `}>
-                                        {order.isPaid ? "Fully Paid" : "Unpaid"}
-                                    </span>
-                                </td>
-                                <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.isDelivered ? "Delivered" : "On the Way"}</td>
-                                <td className="whitespace-nowrap text-sm">
-                                    <button className="p-3 px-6 bg-black text-white" onClick={() => router.push(`/order/order-details?order=${order._id}`)}>View Details</button>
-                                </td>
-                            </tr>
+                            <Link href={`/order/${order._id}`} passHref key={order._id}>
+                                <tr className="hover:bg-gray-200 cursor-pointer">
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        #000{i + 1}
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        <div className="">
+                                            <div className="text-sm font-bold capitalize">{order.createdAt.split("T")[0]}</div>
+                                            <div className="text-xs text-gray-400">YYYY-MM-DD</div>
+                                        </div>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        {/* <div className="text-sm capitalize text-gray-900">{users.find(e => e._id === order.user)?.firstName}</div> */}
+                                        <div className="text-sm text-gray-500"></div>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap">
+                                        <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.isPaid ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} `}>
+                                            {order.isPaid ? "Fully Paid" : "Unpaid"}
+                                        </span>
+                                    </td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.isDelivered ? "Delivered" : "On the Way"}</td>
+                                    <td className="whitespace-nowrap text-sm">
+                                        <div className="text-sm font-bold text-gray-900">₹{order.totalPrice}</div>
+                                    </td>
+                                </tr>
+                            </Link>
                         ))}
                     </tbody>
                 </table>

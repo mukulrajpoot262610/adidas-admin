@@ -3,7 +3,6 @@ import React, { useState } from 'react'
 import Header from '../components/Layout/Header'
 import Navbar from '../components/Layout/Navbar'
 import UserTable from '../components/Tables/UserTable'
-import { getAllUser } from '../services/lib/userHandler'
 
 const Users = ({ users }) => {
 

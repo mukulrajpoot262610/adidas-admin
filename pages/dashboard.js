@@ -1,14 +1,33 @@
 import Head from 'next/head'
-import React, { useEffect } from 'react'
+import React, { useEffect, useState } from 'react'
 import { useSelector } from 'react-redux'
+import { AiOutlineShoppingCart } from 'react-icons/ai';
 import ActivityCard from '../components/Cards/ActivityCard'
 import PopluarProdutsCard from '../components/Cards/PopluarProdutsCard'
 import Header from '../components/Layout/Header'
 import Navbar from '../components/Layout/Navbar'
+import { GetAllOrders, GetStats } from '../services/api';
 
-const Dashboard = () => {
+const Dashboard = ({ stats }) => {
 
     const { user } = useSelector(state => state.auth)
+    const [loading, setLoading] = useState(false)
+    const [response, setResponse] = useState()
+
+    useEffect(() => {
+        const fetchData = async () => {
+            setLoading(true)
+            try {
+                const { data } = await GetStats()
+                setResponse(data)
+                setLoading(false)
+            } catch (err) {
+                console.log(err)
+                setLoading(false)
+            }
+        }
+        fetchData()
+    }, [])
 
     return (
         <div className="min-h-screen w-full">
@@ -31,11 +50,11 @@ const Dashboard = () => {
 
                                 <div className='border-2 border-black w-full p-4'>
                                     <div className='flex justify-between mb-2 font-bold items-center'>
-                                        <i className="fas fa-shopping-bag text-2xl"></i>
+                                        <AiOutlineShoppingCart className='text-2xl' />
                                         <h1 className='text-green-500 text-xl'>+24%</h1>
                                     </div>
-                                    <h1 className='font-bold text-2xl'>$2400.00</h1>
-                                    <h1 className='font-medium text-xs text-gray-400'>Total Sales</h1>
+                                    <h1 className='font-bold text-2xl'>₹{response?.totalSales}</h1>
+                                    <h1 className='font-medium text-xs text-gray-400'>Total Sales <span className='italic'>(All time)</span></h1>
                                 </div>
 
                                 <div className='border-2 border-black w-full mx-8 p-4'>
@@ -43,8 +62,8 @@ const Dashboard = () => {
                                         <i className="fas fa-users text-2xl"></i>
                                         <h1 className='text-green-500 text-xl'>+24%</h1>
                                     </div>
-                                    <h1 className='font-bold text-2xl'>12.00</h1>
-                                    <h1 className='font-medium text-xs text-gray-400'>Total Users</h1>
+                                    <h1 className='font-bold text-2xl'>{response?.totalUsers}</h1>
+                                    <h1 className='font-medium text-xs text-gray-400'>Total Users <span className='italic'>(All time)</span></h1>
                                 </div>
 
                                 <div className='border-2 border-black w-full p-4'>
@@ -52,8 +71,8 @@ const Dashboard = () => {
                                         <i className="fas fa-shopping-cart text-2xl"></i>
                                         <h1 className='text-green-500 text-xl'>+124%</h1>
                                     </div>
-                                    <h1 className='font-bold text-2xl'>112,400.00</h1>
-                                    <h1 className='font-medium text-xs text-gray-400'>Total Orders</h1>
+                                    <h1 className='font-bold text-2xl'>{response?.totalOrders}</h1>
+                                    <h1 className='font-medium text-xs text-gray-400'>Total Orders <span className='italic'>(All time)</span></h1>
                                 </div>
 
                             </div>
@@ -84,4 +103,3 @@ const Dashboard = () => {
 }
 
 export default Dashboard
-

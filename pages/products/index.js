@@ -52,7 +52,7 @@ export async function getStaticProps() {
             revalidate: 10
         }
     } catch (err) {
-        console.log(err.message)
+        console.log(err)
 
         return {
             props: { products: [] }
