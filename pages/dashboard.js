@@ -48,7 +48,7 @@ const Dashboard = ({ stats }) => {
 
                             <div className='flex justify-between mt-4'>
 
-                                <div className='border-2 border-black w-full p-4'>
+                                <div className='border-2  w-full p-4'>
                                     <div className='flex justify-between mb-2 font-bold items-center'>
                                         <AiOutlineShoppingCart className='text-2xl' />
                                         <h1 className='text-green-500 text-xl'>+24%</h1>
@@ -57,7 +57,7 @@ const Dashboard = ({ stats }) => {
                                     <h1 className='font-medium text-xs text-gray-400'>Total Sales <span className='italic'>(All time)</span></h1>
                                 </div>
 
-                                <div className='border-2 border-black w-full mx-8 p-4'>
+                                <div className='border-2  w-full mx-8 p-4'>
                                     <div className='flex justify-between mb-2 font-bold items-center'>
                                         <i className="fas fa-users text-2xl"></i>
                                         <h1 className='text-green-500 text-xl'>+24%</h1>
@@ -66,7 +66,7 @@ const Dashboard = ({ stats }) => {
                                     <h1 className='font-medium text-xs text-gray-400'>Total Users <span className='italic'>(All time)</span></h1>
                                 </div>
 
-                                <div className='border-2 border-black w-full p-4'>
+                                <div className='border-2  w-full p-4'>
                                     <div className='flex justify-between mb-2 font-bold items-center'>
                                         <i className="fas fa-shopping-cart text-2xl"></i>
                                         <h1 className='text-green-500 text-xl'>+124%</h1>
@@ -78,12 +78,12 @@ const Dashboard = ({ stats }) => {
                             </div>
 
                             <div className='mt-8'>
-                                <h1 className='font-bold text-xl'>Popular Products</h1>
+                                <h1 className='font-bold text-xl'>Store Details</h1>
 
-                                <div className='my-4'>
-                                    <PopluarProdutsCard />
-                                    <PopluarProdutsCard />
-                                    <PopluarProdutsCard />
+                                <div className='my-4 flex flex-col gap-4'>
+                                    <h1 className='p-4 border px-4 text-xl'>2540 Orders are ready to be fulfill</h1>
+                                    <h1 className='p-4 border px-4 text-xl'>492 Payments are to be capture</h1>
+                                    <h1 className='p-4 border px-4 text-xl'>No Products are out of stock</h1>
                                 </div>
                             </div>
 
@@ -91,8 +91,11 @@ const Dashboard = ({ stats }) => {
 
                         <div className='w-3/12 p-4'>
                             <h1 className='font-bold text-xl my-4'>Activity</h1>
-                            <div className='border-2 border-black h-750 p-4 overflow-scroll'>
-                                <ActivityCard />
+                            <div className='border-2  h-750 p-4 overflow-scroll'>
+                                {
+                                    response?.notifications.map((e) => <ActivityCard key={e._id} data={e} />)
+                                }
+
                             </div>
                         </div>
                     </div>

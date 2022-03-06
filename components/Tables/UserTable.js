@@ -2,9 +2,9 @@ import { useSelector } from "react-redux"
 
 export default function UserTable({ users, setUsersState }) {
 
-    const userData = useSelector(state => state.user.currentUser)
+    const { user } = useSelector(state => state.auth)
 
-    const user = userData ? userData.user : ""
+    console.log(users[0].name[0])
 
     const handleDelete = async (id) => {
 
@@ -33,7 +33,7 @@ export default function UserTable({ users, setUsersState }) {
                                 scope="col"
                                 className="py-3 px-6 text-left"
                             >
-                                {/* <Checkbox /> */}
+                                <input type="checkbox" />
                             </th>
                             <th
                                 scope="col"
@@ -45,7 +45,7 @@ export default function UserTable({ users, setUsersState }) {
                                 scope="col"
                                 className="px-6 py-3 text-left text-sm uppercase font-bold"
                             >
-                                department
+                                Order Placed
                             </th>
                             <th
                                 scope="col"
@@ -69,23 +69,22 @@ export default function UserTable({ users, setUsersState }) {
                         {users?.map((person) => (
                             <tr key={person._id}>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    {/* <Checkbox /> */}
+                                    <input type="checkbox" />
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
                                     <div className="flex items-center">
                                         <div className="w-9 h-9 bg-black uppercase font-bold flex justify-center items-center text-white">
-                                            {person.firstName[0]}
-                                            {person.lastName[0]}
+                                            {person.name && person.name[0]}
                                         </div>
 
                                         <div className="ml-4">
-                                            <div className="text-sm font-bold capitalize">{person.firstName} {person.lastName}</div>
+                                            <div className="text-sm font-bold capitalize">{person.name}</div>
                                             <div className="text-sm text-gray-400">{person.email}</div>
                                         </div>
                                     </div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm capitalize text-gray-900">{person.gender}</div>
+                                    <div className="text-sm capitalize text-gray-900">{person?.orders?.length}</div>
                                     <div className="text-sm text-gray-500"></div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">

@@ -28,7 +28,7 @@ export default function OrderTable({ orders }) {
                                 scope="col"
                                 className="px-6 py-3 text-left text-sm uppercase font-bold"
                             >
-                                Customer
+                                Quantity
                             </th>
                             <th
                                 scope="col"
@@ -53,7 +53,7 @@ export default function OrderTable({ orders }) {
                             <Link href={`/order/${order._id}`} passHref key={order._id}>
                                 <tr className="hover:bg-gray-200 cursor-pointer">
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        #000{i + 1}
+                                        #{order._id.slice(0, 6)}
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <div className="">
@@ -62,8 +62,9 @@ export default function OrderTable({ orders }) {
                                         </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
-                                        {/* <div className="text-sm capitalize text-gray-900">{users.find(e => e._id === order.user)?.firstName}</div> */}
-                                        <div className="text-sm text-gray-500"></div>
+                                        <div className="text-sm capitalize text-gray-900">
+                                            {order.orderItems.length} Item
+                                        </div>
                                     </td>
                                     <td className="px-6 py-4 whitespace-nowrap">
                                         <span className={`px-2 inline-flex text-xs leading-5 font-semibold rounded-full ${order.isPaid ? "bg-green-100 text-green-800" : "bg-red-100 text-red-800"} `}>

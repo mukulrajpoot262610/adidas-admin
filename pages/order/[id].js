@@ -1,3 +1,4 @@
+import moment from 'moment';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
@@ -51,7 +52,7 @@ const OrderDetails = () => {
                         <div className='flex justify-between items-center'>
                             <div>
                                 <h1 className='font-bold text-xl mt-4'>Order Number: {order._id}</h1>
-                                <h1 className='text-sm'>{order.createdAt.split("T")[0]}</h1>
+                                <h1 className='text-lg text-gray-400'>{moment(order.createdAt).fromNow()}</h1>
                             </div>
                             <div className='flex'>
                                 <button className='border-red-800 border-2 bg-red-100 text-red-800 font-bold p-3'>Cancel Order</button>
@@ -75,6 +76,34 @@ const OrderDetails = () => {
                                     {
                                         order.isPaid ? <h1 className='font-bold text-xl mb-1'></h1> : <h1 className='font-bold text-base px-4 inline-flex leading-5 rounded-full text-red-500 bg-red-50 p-1'>Unpaid</h1>
                                     }
+
+                                    <div className='flex justify-between items-center px-4 my-3'>
+                                        <h1 className='text-xl'>Subtotal <span className='text-sm'>({order.orderItems.length} Items)</span></h1>
+                                        <h1 className='text-xl'>₹{order.totalPrice}</h1>
+                                    </div>
+
+                                    <div className='flex justify-between items-center px-4 my-3'>
+                                        <h1 className='text-xl'>Taxes <span className='text-sm'>	(does not apply)</span></h1>
+                                        <h1 className='text-xl'>₹0</h1>
+                                    </div>
+
+                                    <div className='flex justify-between items-center px-4 my-3'>
+                                        <h1 className='text-xl'>Shipping <span className='text-sm'>(standard)</span></h1>
+                                        <h1 className='text-xl'>₹40</h1>
+                                    </div>
+
+                                    <div className='flex justify-between items-center px-4 my-3'>
+                                        <h1 className='text-xl font-bold'>Total</h1>
+                                        <h1 className='text-xl font-bold'>₹{order.totalPrice + 40}</h1>
+                                    </div>
+
+                                    <hr />
+
+                                    <div className='flex justify-between items-center px-4 my-3'>
+                                        <h1 className='text-xl font-bold'>Amount to be paid</h1>
+                                        <h1 className='text-xl font-bold'>₹{order.totalPrice + 40}</h1>
+                                    </div>
+
                                 </div>
 
                             </div>

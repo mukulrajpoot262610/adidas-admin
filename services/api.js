@@ -19,9 +19,11 @@ export const VerifyAdminOtp = (data) => api.post('/api/verify-admin-otp', data)
 export const logout = () => api.post('/api/logout')
 
 
+export const GetAllUsers = () => api.get('/api/users')
 export const GetAllOrders = () => api.get('/api/orders')
 export const GetOrderDetail = (id) => api.get(`/api/order/${id}`)
 export const GetStats = () => api.get('/api/stats')
+
 
 api.interceptors.response.use((config) => {
     return config

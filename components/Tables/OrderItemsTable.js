@@ -61,10 +61,10 @@ const OrderItemsTable = ({ orders }) => {
                                     <div className="text-sm text-gray-500">{order.qty}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-500">₹{order.product.price}</div>
+                                    <div className="text-sm text-gray-500">₹{order.product.salePrice}</div>
                                 </td>
                                 <td className="px-6 py-4 whitespace-nowrap">
-                                    <div className="text-sm text-gray-500">₹{order.product.price * order.qty}</div>
+                                    <div className="text-sm text-gray-500">₹{order.product.salePrice * order.qty}</div>
                                 </td>
                             </tr>
                         ))}

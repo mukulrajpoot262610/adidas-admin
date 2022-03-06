@@ -1,12 +1,29 @@
 import Head from 'next/head'
-import React, { useState } from 'react'
+import React, { useEffect, useState } from 'react'
 import Header from '../components/Layout/Header'
 import Navbar from '../components/Layout/Navbar'
 import UserTable from '../components/Tables/UserTable'
+import { GetAllUsers } from '../services/api'
 
-const Users = ({ users }) => {
+const Users = () => {
 
-    const [usersState, setUsersState] = useState(users);
+    const [usersState, setUsersState] = useState();
+
+    useEffect(() => {
+
+        const fetchData = async () => {
+            try {
+                const { data } = await GetAllUsers();
+                setUsersState(data.users)
+            } catch (err) {
+                console.log(err)
+            }
+
+        }
+
+        fetchData()
+
+    }, [])
 
     return (
         <div className="min-h-screen w-full">
@@ -33,24 +50,3 @@ const Users = ({ users }) => {
 }
 
 export default Users
-
-export async function getServerSideProps() {
-
-    let users = [];
-
-    try {
-        const res = await getAllUser();
-        if (res.data.success) {
-            users = res.data.users;
-        } else {
-            users = [];
-        }
-    } catch (err) {
-        console.log(err.response.data)
-    }
-
-
-    return {
-        props: { users }
-    }
-}
