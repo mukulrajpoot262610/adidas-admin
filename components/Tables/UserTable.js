@@ -4,8 +4,6 @@ export default function UserTable({ users, setUsersState }) {
 
     const { user } = useSelector(state => state.auth)
 
-    console.log(users[0].name[0])
-
     const handleDelete = async (id) => {
 
         if (user._id === id) {

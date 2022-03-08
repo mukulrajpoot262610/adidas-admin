@@ -2,9 +2,6 @@ import Link from 'next/link'
 import React from 'react'
 
 const OrderItemsTable = ({ orders }) => {
-
-    console.log(orders)
-
     return (
         <div className="overflow-x-auto w-full my-4 border">
             <div className="overflow-hidden">

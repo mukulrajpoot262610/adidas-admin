@@ -71,7 +71,7 @@ export default function OrderTable({ orders }) {
                                             {order.isPaid ? "Fully Paid" : "Unpaid"}
                                         </span>
                                     </td>
-                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.isDelivered ? "Delivered" : "On the Way"}</td>
+                                    <td className="px-6 py-4 whitespace-nowrap text-sm text-gray-500">{order.status ? order.status : "On the Way"}</td>
                                     <td className="whitespace-nowrap text-sm">
                                         <div className="text-sm font-bold text-gray-900">₹{order.totalPrice}</div>
                                     </td>

@@ -4,6 +4,7 @@ import { useRouter } from 'next/router'
 import Sidebar from './Sidebar'
 import Loader from '../../components/Loader'
 import { useAutoLogin } from '../../hooks/useAutoLogin'
+import { Toaster } from 'react-hot-toast';
 
 const Layout = ({ children }) => {
 
@@ -24,6 +25,7 @@ const Layout = ({ children }) => {
                         <div className={`w-full ${check ? "w-full" : "w-10/12"}`}>
                             {children}
                         </div>
+                        <Toaster />
                     </div>
                 }
             </>

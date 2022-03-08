@@ -22,6 +22,7 @@ export const logout = () => api.post('/api/logout')
 export const GetAllUsers = () => api.get('/api/users')
 export const GetAllOrders = () => api.get('/api/orders')
 export const GetOrderDetail = (id) => api.get(`/api/order/${id}`)
+export const UpdateOrderStatus = (id, data) => api.post(`/api/order-status/${id}`, data)
 export const GetStats = () => api.get('/api/stats')
 
 

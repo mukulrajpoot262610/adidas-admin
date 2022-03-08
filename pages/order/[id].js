@@ -2,10 +2,10 @@ import moment from 'moment';
 import Head from 'next/head';
 import { useRouter } from 'next/router';
 import React, { useEffect, useState } from 'react';
-import Header from '../../components/Layout/Header';
 import Navbar from '../../components/Layout/Navbar';
 import OrderItemsTable from '../../components/Tables/OrderItemsTable';
-import { GetOrderDetail } from '../../services/api'
+import { GetOrderDetail, UpdateOrderStatus } from '../../services/api'
+import toast from 'react-hot-toast';
 
 const OrderDetails = () => {
 
@@ -13,10 +13,20 @@ const OrderDetails = () => {
     const [order, setOrder] = useState()
     const [loading, setLoading] = useState(true)
     const [error, setError] = useState(false)
+    const [status, setStatus] = useState()
 
     const { id } = router.query
 
-    console.log(order)
+    const handleDelivery = async () => {
+
+        try {
+            const { data } = await UpdateOrderStatus(id, { status })
+            toast.success("Updated Succesfully")
+        } catch (err) {
+            console.log(err)
+        }
+
+    }
 
     useEffect(() => {
         const fetchData = async () => {
@@ -106,6 +116,22 @@ const OrderDetails = () => {
 
                                 </div>
 
+                                <div className='border border-gray-300 p-4 mt-5'>
+                                    <h1 className='font-bold text-xl mb-1 mx-2'>Order History</h1>
+
+                                    <div className='flex'>
+                                        <select value={status} onChange={(e) => setStatus(e.target.value)} className='w-full border outline-none p-3 mt-2'>
+                                            <option disabled>Choose Order Status</option>
+                                            <option>Shipped</option>
+                                            <option>Arriving Soon</option>
+                                            <option>Payment Received</option>
+                                            <option>Order Completed</option>
+                                            <option>Delivered</option>
+                                        </select>
+                                        <button className='border border-black bg-black text-white p-1 mt-2 px-6 font-bold' onClick={handleDelivery}>Set</button>
+                                    </div>
+                                </div>
+
                             </div>
 
                             <div className='w-3/12 mt-5'>
@@ -142,9 +168,6 @@ const OrderDetails = () => {
                                     <p className='text-gray-400 mt-2'>No invoices to show</p>
                                 </div>
                             </div>
-
-
-
                         </div>
                     </> : "No Orders Found..."
                 }
